@@ -59,11 +59,27 @@ namespace TestProject1
             List<Pass> assertedPasses = new List<Pass>();
 
             // act
-            assertedPasses.Add(new Pass());
+            assertedPasses.Add(new Pass("Michael", 2));
 
             // assert
             Assert.AreEqual(assertedPasses.Count(),
                 PassBusinessLogic.GetAllPasses().Count());
+        }
+
+        [TestMethod]
+        public void CreateNewPass_IfPurchaserArgumentIsNotBetween3And20Characters()
+        {
+            // arrange
+            List<Pass> assertedPasses = new List<Pass>();
+
+            // act
+            assertedPasses.Add(new Pass("M", 2));
+
+            // assert
+            Assert.ThrowsException<Exception>(() =>
+            {
+                PassBusinessLogic.GetAllPasses().Add(new Pass("M", 2));
+            });
         }
 
         [TestMethod]
