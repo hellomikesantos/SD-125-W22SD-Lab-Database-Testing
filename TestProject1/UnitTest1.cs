@@ -31,23 +31,56 @@ namespace TestProject1
                 new ParkingSpot{ID = 5},
             }.AsQueryable();
 
-            var mockDbSet = new Mock<DbSet<Pass>>();
+            var reservationData = new List<Reservation>
+            {
+                new Reservation{ID = 1},
+                new Reservation{ID = 2},
+                new Reservation{ID = 3},
+                new Reservation{ID = 4},
+                new Reservation{ID = 5},
+            }.AsQueryable();
 
+            var vehicleData = new List<Vehicle>
+            {
+                new Vehicle{ID = 1},
+                new Vehicle{ID = 2},
+                new Vehicle{ID = 3},
+                new Vehicle{ID = 4},
+                new Vehicle{ID = 5},
+            }.AsQueryable();
+
+
+            // mock DbSets
+            var mockDbSet = new Mock<DbSet<Pass>>();
             mockDbSet.As<IQueryable<Pass>>().Setup(m => m.Provider).Returns(data.Provider);
             mockDbSet.As<IQueryable<Pass>>().Setup(m => m.Expression).Returns(data.Expression);
             mockDbSet.As<IQueryable<Pass>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockDbSet.As<IQueryable<Pass>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
 
             var mockDbSetForParkingSpot = new Mock<DbSet<ParkingSpot>>();
-
             mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.Provider).Returns(data.Provider);
             mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.Expression).Returns(data.Expression);
             mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
 
+            var mockDbSetForReservation = new Mock<DbSet<Reservation>>();
+            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
+
+            var mockDbSetForVehicle = new Mock<DbSet<Vehicle>>();
+            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
+
+            // mock context setups
             var mockContext = new Mock<ParkingContext>();
             mockContext.Setup(m => m.Passes).Returns(mockDbSet.Object);
             mockContext.Setup(m => m.ParkingSpots).Returns(mockDbSetForParkingSpot.Object);
+            mockContext.Setup(m => m.Reservations).Returns(mockDbSetForReservation.Object);
+            mockContext.Setup(m => m.Vehicles).Returns(mockDbSetForVehicle.Object);
 
             PassBusinessLogic = new PassBusinessLogic(new PassRepository(mockContext.Object),
                 new ParkingSpotRepository(mockContext.Object));

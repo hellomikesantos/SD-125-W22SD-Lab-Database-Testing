@@ -26,5 +26,26 @@
             parkingContext.ParkingSpots.Add(newSpot);
             return newSpot;
         }
+
+        public void AddVehicleToPass(string passholderName, string vehicleLicence)
+        {
+            foreach(Vehicle vehicle in parkingContext.Vehicles)
+            {
+                if(vehicle.Licence == vehicleLicence)
+                {
+                    Pass newPass = new Pass(passholderName, 3);
+                    parkingContext.Passes.Add(newPass);
+                    if (newPass.Capacity.Equals(newPass.Vehicles.Count()))
+                    {
+                        throw new Exception();
+                    }
+                }
+            }
+            if (!parkingContext.Vehicles.Any(v => v.Licence == vehicleLicence))
+            {
+                throw new Exception();
+            }
+            
+        }
     }
 }
