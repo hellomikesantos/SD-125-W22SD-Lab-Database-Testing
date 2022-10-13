@@ -10,7 +10,7 @@
 
         public Pass CreatePass(string purchaser, bool premium, int capacity)
         {
-            Pass newPass = new Pass();
+            Pass newPass = new Pass(purchaser, capacity);
             newPass.Purchaser = purchaser;
             newPass.Premium = premium;
             newPass.Capacity = capacity;

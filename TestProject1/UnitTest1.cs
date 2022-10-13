@@ -15,11 +15,11 @@ namespace TestProject1
             // mock data
             var passesData = new List<Pass>
             {
-                new Pass{ID = 1},
-                new Pass{ID = 2},
-                new Pass{ID = 3},
-                new Pass{ID = 4},
-                new Pass{ID = 5},
+                new Pass("Michael", 3) {ID = 1},
+                new Pass("Michael", 3) {ID = 2},
+                new Pass("Michael", 3) {ID = 3},
+                new Pass("Michael", 3) {ID = 4},
+                new Pass("Michael", 3) {ID = 5},
             }.AsQueryable();
 
             var parkingSpotsData = new List<ParkingSpot>
