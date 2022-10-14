@@ -78,9 +78,9 @@ namespace TestProject1
             // mock context setups
             var mockContext = new Mock<ParkingContext>();
             mockContext.Setup(m => m.Passes).Returns(mockDbSet.Object);
-            //mockContext.Setup(m => m.ParkingSpots).Returns(mockDbSetForParkingSpot.Object);
-            //mockContext.Setup(m => m.Reservations).Returns(mockDbSetForReservation.Object);
-            //mockContext.Setup(m => m.Vehicles).Returns(mockDbSetForVehicle.Object);
+            mockContext.Setup(m => m.ParkingSpots).Returns(mockDbSetForParkingSpot.Object);
+            mockContext.Setup(m => m.Reservations).Returns(mockDbSetForReservation.Object);
+            mockContext.Setup(m => m.Vehicles).Returns(mockDbSetForVehicle.Object);
 
             PassBusinessLogic = new PassBusinessLogic(new PassRepository(mockContext.Object),
                 new ParkingSpotRepository(mockContext.Object));
