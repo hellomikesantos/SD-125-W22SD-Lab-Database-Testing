@@ -38,8 +38,7 @@ namespace SD_125_W22SD_Lab_Database_Testing.BLL
             else
             {
                 throw new Exception();
-            }
-            
+            }   
         }
 
         public void CreateParkingSpot()

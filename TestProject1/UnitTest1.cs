@@ -52,35 +52,35 @@ namespace TestProject1
 
             // mock DbSets
             var mockDbSet = new Mock<DbSet<Pass>>();
-            mockDbSet.As<IQueryable<Pass>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockDbSet.As<IQueryable<Pass>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockDbSet.As<IQueryable<Pass>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockDbSet.As<IQueryable<Pass>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
+            mockDbSet.As<IQueryable<Pass>>().Setup(m => m.Provider).Returns(passesData.Provider);
+            mockDbSet.As<IQueryable<Pass>>().Setup(m => m.Expression).Returns(passesData.Expression);
+            mockDbSet.As<IQueryable<Pass>>().Setup(m => m.ElementType).Returns(passesData.ElementType);
+            mockDbSet.As<IQueryable<Pass>>().Setup(m => m.GetEnumerator()).Returns(passesData.GetEnumerator);
 
             var mockDbSetForParkingSpot = new Mock<DbSet<ParkingSpot>>();
-            mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
+            mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.Provider).Returns(parkingSpotsData.Provider);
+            mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.Expression).Returns(parkingSpotsData.Expression);
+            mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.ElementType).Returns(parkingSpotsData.ElementType);
+            mockDbSetForParkingSpot.As<IQueryable<ParkingSpot>>().Setup(m => m.GetEnumerator()).Returns(parkingSpotsData.GetEnumerator);
 
             var mockDbSetForReservation = new Mock<DbSet<Reservation>>();
-            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
+            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.Provider).Returns(reservationData.Provider);
+            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.Expression).Returns(reservationData.Expression);
+            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.ElementType).Returns(reservationData.ElementType);
+            mockDbSetForReservation.As<IQueryable<Reservation>>().Setup(m => m.GetEnumerator()).Returns(reservationData.GetEnumerator);
 
             var mockDbSetForVehicle = new Mock<DbSet<Vehicle>>();
-            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
+            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.Provider).Returns(vehicleData.Provider);
+            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.Expression).Returns(vehicleData.Expression);
+            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.ElementType).Returns(vehicleData.ElementType);
+            mockDbSetForVehicle.As<IQueryable<Vehicle>>().Setup(m => m.GetEnumerator()).Returns(vehicleData.GetEnumerator);
 
             // mock context setups
             var mockContext = new Mock<ParkingContext>();
             mockContext.Setup(m => m.Passes).Returns(mockDbSet.Object);
-            mockContext.Setup(m => m.ParkingSpots).Returns(mockDbSetForParkingSpot.Object);
-            mockContext.Setup(m => m.Reservations).Returns(mockDbSetForReservation.Object);
-            mockContext.Setup(m => m.Vehicles).Returns(mockDbSetForVehicle.Object);
+            //mockContext.Setup(m => m.ParkingSpots).Returns(mockDbSetForParkingSpot.Object);
+            //mockContext.Setup(m => m.Reservations).Returns(mockDbSetForReservation.Object);
+            //mockContext.Setup(m => m.Vehicles).Returns(mockDbSetForVehicle.Object);
 
             PassBusinessLogic = new PassBusinessLogic(new PassRepository(mockContext.Object),
                 new ParkingSpotRepository(mockContext.Object));
@@ -90,9 +90,14 @@ namespace TestProject1
         {
             // arrange
             List<Pass> assertedPasses = new List<Pass>();
-
-            // act
             assertedPasses.Add(new Pass("Michael", 2));
+            assertedPasses.Add(new Pass("Michael", 2));
+            assertedPasses.Add(new Pass("Michael", 2));
+            assertedPasses.Add(new Pass("Michael", 2));
+            assertedPasses.Add(new Pass("Michael", 2));
+            assertedPasses.Add(new Pass("Michael", 2));
+            // act
+            PassBusinessLogic.CreatePass("Michael", 2);
 
             // assert
             Assert.AreEqual(assertedPasses.Count(),
@@ -104,10 +109,9 @@ namespace TestProject1
         {
             // arrange
             List<Pass> assertedPasses = new List<Pass>();
-
-            // act
             assertedPasses.Add(new Pass("M", 2));
 
+            // act
             // assert
             Assert.ThrowsException<Exception>(() =>
             {
@@ -120,9 +124,15 @@ namespace TestProject1
         {
             // arrange
             List<ParkingSpot> assertedParkingSpots = new List<ParkingSpot>();
+            assertedParkingSpots.Add(new ParkingSpot());
+            assertedParkingSpots.Add(new ParkingSpot());
+            assertedParkingSpots.Add(new ParkingSpot());
+            assertedParkingSpots.Add(new ParkingSpot());
+            assertedParkingSpots.Add(new ParkingSpot());
+            assertedParkingSpots.Add(new ParkingSpot());
 
             // act
-            assertedParkingSpots.Add(new ParkingSpot());
+            PassBusinessLogic.CreateParkingSpot();
 
             // assert
             Assert.AreEqual(assertedParkingSpots.Count(),
