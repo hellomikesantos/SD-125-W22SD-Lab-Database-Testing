@@ -89,33 +89,30 @@ namespace TestProject1
         public void CreateNewPass()
         {
             // arrange
-            List<Pass> assertedPasses = new List<Pass>();
-            assertedPasses.Add(new Pass("Michael", 2));
-            assertedPasses.Add(new Pass("Michael", 2));
-            assertedPasses.Add(new Pass("Michael", 2));
-            assertedPasses.Add(new Pass("Michael", 2));
-            assertedPasses.Add(new Pass("Michael", 2));
-            assertedPasses.Add(new Pass("Michael", 2));
+            var assertedPasses = new List<Pass>
+            {
+                new Pass("Michael", 3) {ID = 1},
+                new Pass("Michael", 3) {ID = 2},
+                new Pass("Michael", 3) {ID = 3},
+                new Pass("Michael", 3) {ID = 4},
+                new Pass("Michael", 3) {ID = 5},
+            };
+
             // act
             PassBusinessLogic.CreatePass("Michael", 2);
+            int actualCount = PassBusinessLogic.GetAllPasses().Count();
 
             // assert
             Assert.AreEqual(assertedPasses.Count(),
-                PassBusinessLogic.GetAllPasses().Count());
+                actualCount);
         }
 
         [TestMethod]
         public void CreateNewPass_IfPurchaserArgumentIsNotBetween3And20Characters()
         {
-            // arrange
-            List<Pass> assertedPasses = new List<Pass>();
-            assertedPasses.Add(new Pass("M", 2));
-
-            // act
-            // assert
             Assert.ThrowsException<Exception>(() =>
             {
-                PassBusinessLogic.GetAllPasses().Add(new Pass("M", 2));
+                PassBusinessLogic.CreatePass("M", 1);
             });
         }
 
@@ -123,13 +120,14 @@ namespace TestProject1
         public void CreateNewParkingSpot()
         {
             // arrange
-            List<ParkingSpot> assertedParkingSpots = new List<ParkingSpot>();
-            assertedParkingSpots.Add(new ParkingSpot());
-            assertedParkingSpots.Add(new ParkingSpot());
-            assertedParkingSpots.Add(new ParkingSpot());
-            assertedParkingSpots.Add(new ParkingSpot());
-            assertedParkingSpots.Add(new ParkingSpot());
-            assertedParkingSpots.Add(new ParkingSpot());
+            List<ParkingSpot> assertedParkingSpots = new List<ParkingSpot>
+            {
+                new ParkingSpot{ID = 1},
+                new ParkingSpot{ID = 2},
+                new ParkingSpot{ID = 3},
+                new ParkingSpot{ID = 4},
+                new ParkingSpot{ID = 5},
+            };
 
             // act
             PassBusinessLogic.CreateParkingSpot();

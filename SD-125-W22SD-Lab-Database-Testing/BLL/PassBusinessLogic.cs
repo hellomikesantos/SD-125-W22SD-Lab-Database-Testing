@@ -28,8 +28,8 @@ namespace SD_125_W22SD_Lab_Database_Testing.BLL
 
         public void CreatePass(string purchaser, int capacity)
         {
-            if(purchaser.Length >= 3 && purchaser .Length <= 20 
-                || capacity <= 0)
+            if(purchaser.Length >= 3 && purchaser.Length <= 20 
+                 && capacity >= 0)
             {
                 Pass pass = new Pass(purchaser, capacity);
                 passRepo.Create(pass);

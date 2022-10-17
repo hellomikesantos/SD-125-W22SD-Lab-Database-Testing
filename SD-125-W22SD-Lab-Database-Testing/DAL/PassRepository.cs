@@ -42,7 +42,7 @@ namespace SD_125_W22SD_Lab_Database_Testing.DAL
 
         public void Save()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
 
         public Pass Update(Pass entity)
